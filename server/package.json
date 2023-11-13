@@ -1,13 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "server files",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
-  "author": "Luan and Huy",
+  "keywords": [],
+  "author": "Luan Tran, Huy Tran",
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.5",
