@@ -11,6 +11,22 @@ export const LOGIN = gql`
   }
 `;
 
+export const ADD_BOOKING = gql`
+  mutation addBooking($doctors: [ID]!) {
+    addBooking(doctors: $doctors) {
+      bookedDate
+      doctors {
+        _id
+        name
+        experience
+        profession {
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const ADD_USER = gql`
   mutation addUser(
     $firstName: String!
