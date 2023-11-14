@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const { Schema } = require("mongoose");
 
 const appointmentSchema = new Schema({
@@ -26,4 +28,6 @@ const appointmentSchema = new Schema({
   },
 });
 
-module.exports = appointmentSchema;
+const Doctor = mongoose.model("Doctor", appointmentSchema);
+
+module.exports = Doctor;
