@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { GraphQLScalarType } from "graphql";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -12,14 +13,15 @@ export const LOGIN = gql`
 `;
 
 export const ADD_BOOKING = gql`
-  mutation addBooking($doctors: [ID]!) {
-    addBooking(doctors: $doctors) {
+  mutation addBooking($services: [ID]!) {
+    addBooking(services: $services) {
       bookedDate
-      doctors {
+      bookedTime
+      services {
         _id
         name
-        experience
-        profession {
+        description
+        field {
           name
         }
       }

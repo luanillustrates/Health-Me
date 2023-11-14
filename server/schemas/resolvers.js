@@ -1,17 +1,17 @@
-const { User, Doctor, Profession, Booking } = require("../models");
+const { User, Service, Field, Booking } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
-    professions: async () => {
-      return await Profession.find();
+    fields: async () => {
+      return await Field.find();
     },
-    doctors: async (parent, { profession, name }) => {
+    services: async (parent, { field, name }) => {
       const params = {};
 
-      if (profession) {
-        params.profession = profession;
+      if (field) {
+        params.field = field;
       }
 
       if (name) {
@@ -20,16 +20,16 @@ const resolvers = {
         };
       }
 
-      return await Doctor.find(params).populate("profession");
+      return await Service.find(params).populate("field");
     },
-    doctor: async (parent, { _id }) => {
-      return await Doctor.findById(_id).populate("profession");
+    service: async (parent, { _id }) => {
+      return await Service.findById(_id).populate("field");
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: "bookings.doctors",
-          populate: "profession",
+          path: "bookings.services",
+          populate: "field",
         });
 
         return user;
@@ -40,8 +40,8 @@ const resolvers = {
     Booking: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: "bookings.doctors",
-          populate: "profession",
+          path: "bookings.services",
+          populate: "field",
         });
 
         return user.bookings.id(_id);
@@ -49,7 +49,7 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    // checkout... optinal donation button
+    // Summary... optinal donation button
   },
 
   Mutation: {
@@ -81,9 +81,16 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+    updateBooking: async (parent, args, context) => {
+      // context user? Or context booking?
+      if (context.user) {
+        return await Booking.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
 
-    // update booking here...
-
+      throw AuthenticationError;
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

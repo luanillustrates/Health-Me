@@ -1,19 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from './App.jsx';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import AppointmentConfirmed from './pages/AppointmentConfirmed';
-import SavedAppointments from './pages/SavedAppointments';
-import Doctor from './pages/Doctor';
+import App from "./App.jsx";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import AppointmentConfirmed from "./pages/AppointmentConfirmed";
+import SavedAppointments from "./pages/SavedAppointments";
+import Service from "./pages/Service";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     error: <NoMatch />,
     children: [
@@ -22,29 +22,29 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <Login />,
       },
       {
-        path: '/signup',
+        path: "/signup",
         element: <Signup />,
       },
       {
-        path: '/apppointmentconfirmed',
+        path: "/apppointmentconfirmed",
         element: <AppointmentConfirmed />,
       },
       {
-        path: '/savedappointments',
+        path: "/savedappointments",
         element: <SavedAppointments />,
       },
       {
-        path: '/products/:id',
-        element: <Doctor />,
+        path: "/products/:id",
+        element: <Service />,
       },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );

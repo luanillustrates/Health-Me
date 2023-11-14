@@ -5,12 +5,20 @@ const { Schema } = mongoose;
 const bookingSchema = new Schema({
   bookedDate: {
     type: Date,
-    default: Date.now,
+    required: true,
   },
-  doctors: [
+  bookedTime: {
+    type: String,
+    required: true,
+  },
+  comment: {
+    type: String,
+    required: true,
+  },
+  services: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Doctor",
+      ref: "Service",
     },
   ],
 });
