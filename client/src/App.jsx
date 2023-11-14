@@ -5,20 +5,21 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Nav from './components/Nav';
+import Home from './components/Home';
+import Services from './components/Services';
+import Contact from './components/Contact';
 import './App.css';
 
 function App() {
   return (
     <>
-      <ApolloProvider client={client}>
-        <Stack spacing={2} direction="row">
-          <Button variant="text">Text</Button>
-          <Button variant="contained">Contained</Button>
-          <Button variant="outlined">Outlined</Button>
-        </Stack>
-      </ApolloProvider>
+      {/* <ApolloProvider client={client}> */}
+      <Nav />
+      <Home />
+      <Services />
+      <Contact />
+      {/* </ApolloProvider> */}
     </>
   );
 }

@@ -1,6 +1,6 @@
-const { User, Doctor, Profession, Booking } = require("../models");
-const { signToken, AuthenticationError } = require("../utils/auth");
-const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+const { User, Doctor, Profession, Booking } = require('../models');
+const { signToken, AuthenticationError } = require('../utils/auth');
+// const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
@@ -20,16 +20,16 @@ const resolvers = {
         };
       }
 
-      return await Doctor.find(params).populate("profession");
+      return await Doctor.find(params).populate('profession');
     },
     doctor: async (parent, { _id }) => {
-      return await Doctor.findById(_id).populate("profession");
+      return await Doctor.findById(_id).populate('profession');
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: "bookings.doctors",
-          populate: "profession",
+          path: 'bookings.doctors',
+          populate: 'profession',
         });
 
         return user;
@@ -37,18 +37,18 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    Booking: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "bookings.doctors",
-          populate: "profession",
-        });
+    // Booking: async (parent, { _id }, context) => {
+    //   if (context.user) {
+    //     const user = await User.findById(context.user._id).populate({
+    //       path: 'bookings.doctors',
+    //       populate: 'profession',
+    //     });
 
-        return user.bookings.id(_id);
-      }
+    //     return user.bookings.id(_id);
+    //   }
 
-      throw AuthenticationError;
-    },
+    //   throw AuthenticationError;
+    // },
     // checkout... optinal donation button
   },
 
