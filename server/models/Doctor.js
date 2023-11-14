@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const { Schema } = require("mongoose");
 
 const appointmentSchema = new Schema({
@@ -7,15 +9,11 @@ const appointmentSchema = new Schema({
       required: true,
     },
   ],
-  doctorId: {
+  experience: {
     type: String,
     required: true,
   },
   image: {
-    type: String,
-    required: true,
-  },
-  experience: {
     type: String,
     required: true,
   },
@@ -26,4 +24,6 @@ const appointmentSchema = new Schema({
   },
 });
 
-module.exports = appointmentSchema;
+const Doctor = mongoose.model("Doctor", appointmentSchema);
+
+module.exports = Doctor;
