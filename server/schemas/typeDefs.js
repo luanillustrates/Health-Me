@@ -7,7 +7,7 @@ const typeDefs = `#graphql
   type Doctor {
     _id: ID
     name: String
-    description: String
+    # description: String
     image: String
     experience: String
     profession: Profession

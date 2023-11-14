@@ -9,15 +9,11 @@ const appointmentSchema = new Schema({
       required: true,
     },
   ],
-  doctorId: {
+  experience: {
     type: String,
     required: true,
   },
   image: {
-    type: String,
-    required: true,
-  },
-  experience: {
     type: String,
     required: true,
   },
