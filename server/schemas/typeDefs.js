@@ -46,7 +46,6 @@ const typeDefs = `#graphql
     service(_id: ID!): Service
     user: User
     booking(_id: ID!): Booking
-    summary(services: [chosenService]): Summary
   }
 
   type Mutation {
