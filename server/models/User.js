@@ -23,17 +23,16 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 6,
   },
   phoneNumber: {
     type: Number,
     required: true,
     maxlength: 10,
   },
-  dateOfBirth: {
+  dob: {
     type: Date,
     required: true,
-    maxlength: 10,
   },
   bookings: [Booking.schema],
 });
