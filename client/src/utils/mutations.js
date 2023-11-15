@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { GraphQLScalarType } from "graphql";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
