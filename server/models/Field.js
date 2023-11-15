@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const professionSchema = new Schema({
+const fieldSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -10,6 +10,6 @@ const professionSchema = new Schema({
   },
 });
 
-const Profession = mongoose.model("Profession", professionSchema);
+const Field = mongoose.model("Field", fieldSchema);
 
-module.exports = Profession;
+module.exports = Field;

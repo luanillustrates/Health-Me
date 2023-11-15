@@ -1,43 +1,35 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_DOCTORS = gql`
-  query getDoctors($profession: ID) {
-    doctors(profession: $profession) {
+export const QUERY_SERVICES = gql`
+  query getServices($field: ID) {
+    services(field: $field) {
       _id
       name
-      experience
+      description
       image
-      profession {
+      field {
         _id
       }
     }
   }
 `;
 
-// export const QUERY_CHECKOUT = gql`
-//   query getCheckout($doctors: [chosenDoctor]) {
-//     checkout(doctors: $doctors) {
-//       session
-//     }
-//   }
-// `;
-
-export const QUERY_ALL_DOCTORS = gql`
+export const QUERY_ALL_SERVICES = gql`
   {
-    doctors {
+    services {
       _id
       name
-      experience
-      profession {
+      description
+      field {
         name
       }
     }
   }
 `;
 
-export const QUERY_PROFESSIONS = gql`
+export const QUERY_FIELDS = gql`
   {
-    professions {
+    fields {
       _id
       name
     }
@@ -52,11 +44,10 @@ export const QUERY_USER = gql`
       bookings {
         _id
         bookedDate
-        doctors {
+        services {
           _id
           name
-          # description
-          experience
+          description
           image
         }
       }

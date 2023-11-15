@@ -1,6 +1,6 @@
 const User = require("./User");
-const Doctor = require("./Doctor");
-const Profession = require("./Profession");
+const Service = require("./Service");
+const Field = require("./Field");
 const Booking = require("./Booking");
 
-module.exports = { User, Doctor, Profession, Booking };
+module.exports = { User, Service, Field, Booking };

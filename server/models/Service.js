@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
-const { Schema } = require("mongoose");
+const { Schema } = mongoose;
 
-const appointmentSchema = new Schema({
+const serviceSchema = new Schema({
   name: [
     {
       type: String,
       required: true,
     },
   ],
-  experience: {
+  description: {
     type: String,
     required: true,
   },
@@ -17,13 +17,13 @@ const appointmentSchema = new Schema({
     type: String,
     required: true,
   },
-  profession: {
+  field: {
     type: Schema.Types.ObjectId,
-    ref: "Profession",
+    ref: "Field",
     required: true,
   },
 });
 
-const Doctor = mongoose.model("Doctor", appointmentSchema);
+const Service = mongoose.model("Service", serviceSchema);
 
-module.exports = Doctor;
+module.exports = Service;
