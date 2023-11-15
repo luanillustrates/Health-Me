@@ -15,7 +15,7 @@ const typeDefs = `#graphql
 
   type Booking {
     _id: ID
-    bookedDate: Date
+    # bookedDate: Date
     doctors: [Doctor]
   }
 
@@ -25,7 +25,7 @@ const typeDefs = `#graphql
     lastName: String
     email: String
     phoneNumber: Int
-    dob: Date
+    # dob: Date
     bookings: [Booking]
   }
 
