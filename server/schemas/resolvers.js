@@ -37,19 +37,18 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    Booking: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "bookings.services",
-          populate: "field",
-        });
+    // Booking: async (parent, { _id }, context) => {
+    //   if (context.user) {
+    //     const user = await User.findById(context.user._id).populate({
+    //       // path: "bookings.services",
+    //       // populate: "field",
+    //     });
 
-        return user.bookings.id(_id);
-      }
+    //     // return user.bookings.id(_id);
+    //   }
 
-      throw AuthenticationError;
-    },
-    // Summary... optinal donation button
+    //   throw AuthenticationError;
+    // },
   },
 
   Mutation: {
