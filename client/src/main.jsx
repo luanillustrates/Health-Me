@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 import {
   createBrowserRouter,
   RouterProvider,
   BrowserRouter,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import App from './App.jsx';
+import App from "./App.jsx";
 // import Home from './pages/Home';
 // import Login from './pages/Login';
 // import Signup from './pages/Signup';
@@ -34,12 +34,12 @@ import App from './App.jsx';
 //       //   element: <Signup />,
 //       // },
 //       {
-//         path: '/apppointmentconfirmed',
-//         element: <AppointmentConfirmed />,
+//         path: '/summary',
+//         element: <Summary />,
 //       },
 //       {
-//         path: '/savedappointments',
-//         element: <SavedAppointments />,
+//         path: '/bookings',
+//         element: <Bookings />,
 //       },
 //       {
 //         path: '/products/:id',
@@ -49,10 +49,11 @@ import App from './App.jsx';
 //   },
 // ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   // <RouterProvider router={router} />
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
+);

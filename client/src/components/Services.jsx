@@ -1,71 +1,71 @@
-import * as React from 'react';
-import { Container, Typography, Grid } from '@mui/material/';
-import ServiceCard from './ServiceCard';
+import * as React from "react";
+import { Container, Typography, Grid } from "@mui/material/";
+import ServiceCard from "./ServiceCard";
 
-import generalhealth from '../assets/images/generalhealth.jpg';
-import earspecialist from '../assets/images/earspecialist.jpg';
-import eyespecialist from '../assets/images/eyespecialist.jpg';
-import eyetest from '../assets/images/eyetest.jpg';
-import heartest from '../assets/images/heartest.jpg';
-import scans from '../assets/images/scans.jpg';
-import specialistref from '../assets/images/specialistref.jpg';
-import teethclean from '../assets/images/teethclean.jpg';
-import teethspecialist from '../assets/images/teethspecialist.jpg';
+import generalhealth from "../../public/assets/images/generalhealth.jpg";
+import earspecialist from "../../public/assets/images/earspecialist.jpg";
+import eyespecialist from "../../public/assets/images/eyespecialist.jpg";
+import eyetest from "../../public/assets/images/eyetest.jpg";
+import heartest from "../../public/assets/images/heartest.jpg";
+import scans from "../../public/assets/images/scans.jpg";
+import specialistref from "../../public/assets/images/specialistref.jpg";
+import teethclean from "../../public/assets/images/teethclean.jpg";
+import teethspecialist from "../../public/assets/images/teethspecialist.jpg";
 
 const services = [
   {
-    title: 'General Health Check',
-    info: 'The routine body maintenance',
+    title: "General Health Check",
+    info: "The routine body maintenance",
     image: generalhealth,
-    alt: 'stethoscope',
+    alt: "stethoscope",
   },
   {
-    title: 'Ear Specialist',
-    info: 'You want someone to hear you out',
+    title: "Ear Specialist",
+    info: "You want someone to hear you out",
     image: earspecialist,
-    alt: 'doctor checking ear',
+    alt: "doctor checking ear",
   },
   {
-    title: 'Eye Specialist',
-    info: 'The doctor you want to keep your eye on',
+    title: "Eye Specialist",
+    info: "The doctor you want to keep your eye on",
     image: eyespecialist,
-    alt: 'optom tool',
+    alt: "eye examination equipment",
   },
   {
-    title: 'Eye Test',
-    info: 'It is time to see if you are due for glasses',
+    title: "Eye Test",
+    info: "It is time to see if you are due for glasses",
     image: eyetest,
-    alt: 'eye test',
+    alt: "eye test",
   },
   {
-    title: 'Hearing Test',
-    info: 'It was not the wax stopping the hearing',
+    title: "Hearing Test",
+    info: "It was not the wax stopping the hearing",
     image: heartest,
-    alt: 'hearing test',
+    alt: "hearing test",
   },
   {
-    title: 'Scans',
-    info: 'X-Rays, MRIs',
+    title: "Scans",
+    info: "X-Rays, MRIs",
     image: scans,
-    alt: 'viewing mri',
+    alt: "examining mri scan",
   },
   {
-    title: 'Specialist Referral',
-    info: 'The issues are not just skin deep',
+    title: "Specialist Referral",
+    info: "The issues are not just skin deep",
     image: specialistref,
-    alt: 'doctor meeting',
+    alt: "doctor appointment",
   },
   {
-    title: 'Teeth Clean',
-    info: 'You forgot to floss',
+    title: "Teeth Clean",
+    info: "You forgot to floss",
     image: teethclean,
-    alt: 'teeth clean',
+    alt: "teeth clean",
   },
   {
-    title: 'Teeth Specialist',
-    info: 'You want someone to hear you out',
+    title: "Teeth Specialist",
+    info: "You want someone to hear you out",
     image: teethspecialist,
-    alt: 'checking teeth',
+    alt: "checking teeth",
   },
 ];
 
