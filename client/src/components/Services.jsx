@@ -2,69 +2,78 @@ import * as React from "react";
 import { Container, Typography, Grid } from "@mui/material/";
 import ServiceCard from "./ServiceCard";
 
-import generalhealth from "../../public/assets/images/generalhealth.jpg";
-import earspecialist from "../../public/assets/images/earspecialist.jpg";
-import eyespecialist from "../../public/assets/images/eyespecialist.jpg";
-import eyetest from "../../public/assets/images/eyetest.jpg";
-import heartest from "../../public/assets/images/heartest.jpg";
-import scans from "../../public/assets/images/scans.jpg";
-import specialistref from "../../public/assets/images/specialistref.jpg";
-import teethclean from "../../public/assets/images/teethclean.jpg";
-import teethspecialist from "../../public/assets/images/teethspecialist.jpg";
+import generalhealth from "../assets/images/generalhealth.jpg";
+import earspecialist from "../assets/images/earspecialist.jpg";
+import eyespecialist from "../assets/images/eyespecialist.jpg";
+import eyetest from "../assets/images/eyetest.jpg";
+import heartest from "../assets/images/heartest.jpg";
+import scans from "../assets/images/scans.jpg";
+import specialistref from "../assets/images/specialistref.jpg";
+import teethclean from "../assets/images/teethclean.jpg";
+import teethspecialist from "../assets/images/teethspecialist.jpg";
 
 const services = [
   {
-    title: "General Health Check",
-    info: "The routine body maintenance",
+    name: "General Health Check",
+    description: "The routine body maintenance",
     image: generalhealth,
+    field: "General Health",
     alt: "stethoscope",
   },
   {
-    title: "Ear Specialist",
-    info: "You want someone to hear you out",
+    name: "Ear Specialist",
+    description: "You want someone to hear you out",
     image: earspecialist,
+    field: "Audiologist",
     alt: "doctor checking ear",
   },
   {
-    title: "Eye Specialist",
-    info: "The doctor you want to keep your eye on",
+    name: "Eye Specialist",
+    description: "The doctor you want to keep your eye on",
     image: eyespecialist,
+    field: "Optometrist",
     alt: "eye examination equipment",
   },
   {
-    title: "Eye Test",
-    info: "It is time to see if you are due for glasses",
+    name: "Eye Test",
+    description: "It is time to see if you are due for glasses",
     image: eyetest,
+    field: "Optometrist",
     alt: "eye test",
   },
   {
-    title: "Hearing Test",
-    info: "It was not the wax stopping the hearing",
+    name: "Hearing Test",
+    description: "It was not the wax stopping the hearing",
     image: heartest,
+    field: "Audiologist",
     alt: "hearing test",
   },
   {
-    title: "Scans",
-    info: "X-Rays, MRIs",
+    name: "Scans",
+    description: "X-Rays, MRIs",
     image: scans,
+    field: "General Health",
     alt: "examining mri scan",
   },
   {
-    title: "Specialist Referral",
-    info: "The issues are not just skin deep",
+    name: "Specialist Referral",
+    description: "The issues are not just skin deep",
     image: specialistref,
+    field: "General Health",
     alt: "doctor appointment",
   },
   {
-    title: "Teeth Clean",
-    info: "You forgot to floss",
+    name: "Teeth Clean",
+    description: "You forgot to floss",
     image: teethclean,
+    field: "Dentistry",
     alt: "teeth clean",
   },
   {
-    title: "Teeth Specialist",
-    info: "You want someone to hear you out",
+    name: "Teeth Specialist",
+    description: "You want someone to hear you out",
     image: teethspecialist,
+    field: "Dentistry",
     alt: "checking teeth",
   },
 ];
@@ -81,8 +90,8 @@ export default function Services() {
         {services.map((service) => {
           return (
             <ServiceCard
-              title={service.title}
-              info={service.info}
+              name={service.name}
+              description={service.description}
               image={service.image}
             />
           );

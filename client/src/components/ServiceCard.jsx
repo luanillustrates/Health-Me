@@ -1,4 +1,4 @@
-import { PropTypes } from 'prop-types';
+import { PropTypes } from "prop-types";
 import {
   Typography,
   Card,
@@ -6,18 +6,18 @@ import {
   CardContent,
   CardMedia,
   Button,
-} from '@mui/material/';
+} from "@mui/material/";
 
-export default function ServiceCard({ title, image, alt, info }) {
+export default function ServiceCard({ name, image, alt, description }) {
   return (
     <Card sx={{ maxWidth: 350 }}>
-      <CardMedia component="img" alt={alt} height="250" image={image} />
+      <CardMedia component="img" alt={alt} height="250" src={image} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {info}
+          {description}
         </Typography>
       </CardContent>
       <CardActions>
@@ -28,7 +28,7 @@ export default function ServiceCard({ title, image, alt, info }) {
 }
 
 ServiceCard.PropTypes = {
-  title: PropTypes.string.isRequired,
-  info: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 };

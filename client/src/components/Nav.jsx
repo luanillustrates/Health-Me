@@ -1,7 +1,7 @@
 // import Auth from '../../utils/auth';
 import { Link } from "react-router-dom";
 
-import logo from "../../public/assets/images/healthme_logo.png";
+import logo from "../assets/images/healthme_logo.png";
 
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
