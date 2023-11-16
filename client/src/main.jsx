@@ -4,8 +4,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
-import Home from "./pages/Home.jsx";
-// import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Error from "./pages/Error";
+import Login from "./pages/Login";
 // import Signup from "./pages/Signup";
 // import Summary from "./pages/Summary";
 // import Bookings from "./pages/Bookings";
@@ -14,16 +15,16 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // error: <NoMatch />,
+    error: <Error />,
     children: [
       {
         index: true,
         element: <Home />,
       },
-      // {
-      //   path: "/login",
-      //   element: <Login />,
-      // },
+      {
+        path: "/login",
+        element: <Login />,
+      },
       // {
       //   path: "/signup",
       //   element: <Signup />,
