@@ -3,15 +3,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
   return (
@@ -22,7 +19,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="">
         Health Me
       </Link>{" "}
       {new Date().getFullYear()}
@@ -32,22 +29,33 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
+  const [textFieldValue, setTextFieldValue] = React.useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    // checks if textfield is empty
+    if (textFieldValue.trim() === "") {
+      console.log("TextField is empty. Please enter a value.");
+      return;
+    }
+
+    // if textfield is not empty, proceed with form submission logic
+    console.log("Form submitted with value:", textFieldValue);
+
+    // resets textfield value after submission if needed
+    setTextFieldValue("");
   };
 
+  // const token = mutationResponse.data.addUser.token;
+  // Auth.login(token);
+
   return (
-    // <ThemeProvider theme={defaultTheme}>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -63,13 +71,14 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="given-name"
-                name="firstName"
                 required
                 fullWidth
                 id="firstName"
                 label="First Name"
-                autoFocus
+                name="firstName"
+                autoComplete="given-name"
+                value={textFieldValue}
+                onChange={(e) => setTextFieldValue(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -80,6 +89,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                value={textFieldValue}
+                onChange={(e) => setTextFieldValue(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,6 +101,33 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={textFieldValue}
+                onChange={(e) => setTextFieldValue(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id="dob"
+                label="Date of Birth "
+                placeholder="(DD/MM/YYYY)"
+                name="dob"
+                autoComplete="date-of-birth"
+                value={textFieldValue}
+                onChange={(e) => setTextFieldValue(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id="phoneNumber"
+                label="Phone Number"
+                name="phoneNumber"
+                autoComplete="phone-number"
+                value={textFieldValue}
+                onChange={(e) => setTextFieldValue(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -101,12 +139,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                value={textFieldValue}
+                onChange={(e) => setTextFieldValue(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -114,14 +148,14 @@ export default function SignUp() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, py: 2 }}
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent="center">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link href="/login" variant="body2">
+                Already have an account? Login
               </Link>
             </Grid>
           </Grid>
@@ -129,6 +163,5 @@ export default function SignUp() {
       </Box>
       <Copyright sx={{ mt: 5 }} />
     </Container>
-    // </ThemeProvider>
   );
 }
