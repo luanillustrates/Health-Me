@@ -8,7 +8,8 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 
 import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+// import SignupForm from "./SignupForm";
+import Test from "./TestForm";
 
 export default function LoginSignupCard() {
   const [value, setValue] = React.useState(0);
@@ -33,7 +34,7 @@ export default function LoginSignupCard() {
         </Box>
         <Box hidden={value !== 1}>
           <Typography component="div">
-            <SignupForm />
+            <Test />
           </Typography>
         </Box>
       </CardContent>

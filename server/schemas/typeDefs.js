@@ -25,7 +25,7 @@ const typeDefs = `#graphql
     firstName: String
     lastName: String
     email: String
-    phoneNumber: Int
+    phoneNumber: String
     dob: String
     bookings: [Booking]
   }
@@ -49,9 +49,9 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: Int!, dob: String!): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!, dob: String!): Auth
     addBooking(bookedDate: String!, bookedTime: String!, comment: String!, services: [ID]!): Booking
-    updateUser(firstName: String, lastName: String, email: String, password: String, phoneNumber: Int!, dob: String!): User
+    updateUser(firstName: String, lastName: String, email: String, password: String, phoneNumber: String!, dob: String!): User
     updateBooking(bookedDate: String!, bookedTime: String!, comment: String!, services: [ID]!): Booking
     login(email: String!, password: String!): Auth
   }
