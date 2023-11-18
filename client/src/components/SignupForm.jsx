@@ -10,6 +10,12 @@ import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import { PatternFormat } from "react-number-format";
+
+import Auth from "../utils/auth";
+import { ADD_USER } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+
 function Copyright(props) {
   return (
     <Typography
@@ -28,27 +34,65 @@ function Copyright(props) {
   );
 }
 
+const DEFAULT_SIGNUP_FORM = {
+  //change all to null when done
+  firstName: null,
+  lastName: null,
+  email: null,
+  dob: null,
+  phoneNumber: null,
+  password: null,
+};
+
 export default function SignUp() {
-  const [textFieldValue, setTextFieldValue] = React.useState("");
+  const [signUpForm, setSignUpForm] = React.useState(DEFAULT_SIGNUP_FORM);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  function handleOnChange(e) {
+    e.preventDefault();
 
-    // checks if textfield is empty
-    if (textFieldValue.trim() === "") {
-      console.log("TextField is empty. Please enter a value.");
+    setSignUpForm((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  }
+
+  // validates each input
+  function isValid() {
+    return (
+      signUpForm.firstName != null &&
+      signUpForm.firstName.trim().length > 0 &&
+      signUpForm.lastName != null &&
+      signUpForm.lastName.trim().length > 0 &&
+      signUpForm.email != null &&
+      signUpForm.email.trim().length > 0 &&
+      signUpForm.dob != null &&
+      signUpForm.dob.trim().length > 0 &&
+      signUpForm.phoneNumber != null &&
+      signUpForm.phoneNumber.trim().length > 0 &&
+      signUpForm.password != null &&
+      signUpForm.password.trim().length > 0
+    );
+  }
+
+  // function to handle create user
+  async function handleSubmit(e) {
+    const [addUser] = useMutation(ADD_USER);
+
+    e.preventDefault();
+
+    if (isValid()) {
+      const mutationResponse = await addUser({
+        variables: signUpForm,
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
       return;
     }
 
-    // if textfield is not empty, proceed with form submission logic
-    console.log("Form submitted with value:", textFieldValue);
-
-    // resets textfield value after submission if needed
-    setTextFieldValue("");
-  };
-
-  // const token = mutationResponse.data.addUser.token;
-  // Auth.login(token);
+    alert("Something went wrong");
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -67,7 +111,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -77,8 +121,8 @@ export default function SignUp() {
                 label="First Name"
                 name="firstName"
                 autoComplete="given-name"
-                value={textFieldValue}
-                onChange={(e) => setTextFieldValue(e.target.value)}
+                value={signUpForm.firstName}
+                onChange={handleOnChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -89,8 +133,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
-                value={textFieldValue}
-                onChange={(e) => setTextFieldValue(e.target.value)}
+                value={signUpForm.lastName}
+                onChange={handleOnChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,27 +142,45 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 autoComplete="email"
-                value={textFieldValue}
-                onChange={(e) => setTextFieldValue(e.target.value)}
+                type="email"
+                value={signUpForm.email}
+                onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 required
                 fullWidth
                 id="dob"
                 label="Date of Birth "
-                placeholder="(DD/MM/YYYY)"
                 name="dob"
                 autoComplete="date-of-birth"
-                value={textFieldValue}
-                onChange={(e) => setTextFieldValue(e.target.value)}
+                placeholder="DD/MM/YYYY"
+                inputProps={{ maxLength: 8 }}
+                value={signUpForm.dob}
+                onChange={handleOnChange}
+              />
+            </Grid> */}
+            <Grid item xs={12} sm={6}>
+              <PatternFormat
+                required
+                fullWidth
+                id="dob"
+                label="Date of Birth "
+                name="dob"
+                autoComplete="date-of-birth"
+                placeholder="DD/MM/YYYY"
+                customInput={TextField}
+                type="tel"
+                format="##/##/####"
+                value={signUpForm.dob}
+                onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 required
                 fullWidth
@@ -126,8 +188,25 @@ export default function SignUp() {
                 label="Phone Number"
                 name="phoneNumber"
                 autoComplete="phone-number"
-                value={textFieldValue}
-                onChange={(e) => setTextFieldValue(e.target.value)}
+                type="tel"
+                inputProps={{ maxLength: 10 }}
+                value={signUpForm.phoneNumber}
+                onChange={handleOnChange}
+              />
+            </Grid> */}
+            <Grid item xs={12} sm={6}>
+              <PatternFormat
+                required
+                fullWidth
+                id="phoneNumber"
+                label="Phone Number"
+                name="phoneNumber"
+                autoComplete="phone-number"
+                customInput={TextField}
+                type="tel"
+                format="#### ### ###"
+                value={signUpForm.phoneNumber}
+                onChange={handleOnChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -139,8 +218,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                value={textFieldValue}
-                onChange={(e) => setTextFieldValue(e.target.value)}
+                value={signUpForm.password}
+                onChange={handleOnChange}
               />
             </Grid>
           </Grid>
@@ -152,16 +231,9 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Link href="/login" variant="body2">
-                Already have an account? Login
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
+      <Copyright sx={{ mt: 2 }} />
     </Container>
   );
 }
