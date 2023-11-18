@@ -26,12 +26,11 @@ const userSchema = new Schema({
     minlength: 6,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true,
-    maxlength: 10,
   },
   dob: {
-    type: Date,
+    type: String,
     required: true,
   },
   bookings: [Booking.schema],

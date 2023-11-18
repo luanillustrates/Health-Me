@@ -19,8 +19,19 @@ export default function LoginSignupCard() {
 
   return (
     <Card>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange}>
+      <AppBar
+        position="static"
+        style={{
+          background: "transparent",
+          boxShadow: "none",
+        }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="fullWidth"
+          centered
+        >
           <Tab label="Login" />
           <Tab label="Signup" />
         </Tabs>

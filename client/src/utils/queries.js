@@ -44,6 +44,7 @@ export const QUERY_USER = gql`
       bookings {
         _id
         bookedDate
+        bookedTime
         services {
           _id
           name

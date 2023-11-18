@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const bookingSchema = new Schema({
   bookedDate: {
-    type: Date,
+    type: String,
     required: true,
   },
   bookedTime: {
