@@ -19,6 +19,7 @@ export default function BookingForm() {
         <DigitalClock
           defaultValue={dayjs('2022-04-17T15:30')}
           ampm
+          skipDisabled
           minTime={dayjs().set('hour', 9).startOf('hour')}
           maxTime={dayjs().set('hour', 16).startOf('hour')}
         />
