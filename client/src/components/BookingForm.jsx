@@ -1,59 +1,28 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
-import { InlineWidget, useCalendlyEventListener } from 'react-calendly';
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
+import { DigitalClock } from '@mui/x-date-pickers/DigitalClock';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Box } from '@mui/material';
 
-// const BOOK_APPOINTMENT = gql`
-//   mutation BookAppointment($name: String!, $email: String!) {
-//     bookAppointment(name: $name, email: $email) {
-//       success
-//       message
-//     }
-//   }
-// `;
-
-const BookingForm = () => {
-  useCalendlyEventListener({
-    onEventScheduled: (e) => console.log(e.data.payload),
-  });
-  //   const [name, setName] = useState('');
-  //   const [email, setEmail] = useState('');
-
-  //   const [bookAppointment] = useMutation(BOOK_APPOINTMENT);
-
-  //   const handleBookAppointment = async () => {
-  //     try {
-  //       const { data } = await bookAppointment({
-  //         variables: {
-  //           name,
-  //           email,
-  //         },
-  //       });
-
-  //       if (data.bookAppointment.success) {
-  //         console.log(
-  //           'Appointment booked successfully:',
-  //           data.bookAppointment.message
-  //         );
-  //         alert('Appointment booked successfully!');
-  //       } else {
-  //         console.error(
-  //           'Error booking appointment:',
-  //           data.bookAppointment.message
-  //         );
-  //         alert('Error booking appointment. Please try again.');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error:', error);
-  //       alert('An error occurred. Please try again.');
-  //     }
-  //   };
-
+export default function BookingForm() {
   return (
-    <div className="App">
-      <InlineWidget url="https://calendly.com/luanillustrates/booking?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=83D8C6" />
-    </div>
-  );
-};
+    <Box>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        {/* <DemoContainer components={['StaticDatePicker']}>
+          <DemoItem label=""> */}
+        <StaticDatePicker defaultValue={dayjs('')} />
+        {/* </DemoItem>
+        </DemoContainer> */}
 
-export default BookingForm;
+        <DigitalClock
+          defaultValue={dayjs('2022-04-17T15:30')}
+          ampm
+          minTime={dayjs().set('hour', 9).startOf('hour')}
+          maxTime={dayjs().set('hour', 16).startOf('hour')}
+        />
+      </LocalizationProvider>
+    </Box>
+  );
+}
