@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { FormControl } from "@mui/material";
 
 import { PatternFormat } from "react-number-format";
 
@@ -16,83 +17,40 @@ import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="">
-        Health Me
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+function Signup(props) {
+  const [formState, setFormState] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    dob: "",
+    phoneNumber: "",
+    password: "",
+  });
+  const [addUser] = useMutation(ADD_USER);
 
-const DEFAULT_SIGNUP_FORM = {
-  //change all to null when done
-  firstName: null,
-  lastName: null,
-  email: null,
-  dob: null,
-  phoneNumber: null,
-  password: null,
-};
-
-export default function SignUp() {
-  const [signUpForm, setSignUpForm] = React.useState(DEFAULT_SIGNUP_FORM);
-
-  function handleOnChange(e) {
-    e.preventDefault();
-
-    setSignUpForm((prevState) => {
-      return {
-        ...prevState,
-        [e.target.name]: e.target.value,
-      };
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const mutationResponse = await addUser({
+      variables: {
+        firstName: formState.firstName,
+        lastName: formState.lastName,
+        email: formState.email,
+        dob: formState.dob,
+        phoneNumber: formState.phoneNumber,
+        password: formState.password,
+      },
     });
-  }
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+  };
 
-  // validates each input
-  function isValid() {
-    return (
-      signUpForm.firstName != null &&
-      signUpForm.firstName.trim().length > 0 &&
-      signUpForm.lastName != null &&
-      signUpForm.lastName.trim().length > 0 &&
-      signUpForm.email != null &&
-      signUpForm.email.trim().length > 0 &&
-      signUpForm.dob != null &&
-      signUpForm.dob.trim().length > 0 &&
-      signUpForm.phoneNumber != null &&
-      signUpForm.phoneNumber.trim().length > 0 &&
-      signUpForm.password != null &&
-      signUpForm.password.trim().length > 0
-    );
-  }
-
-  // function to handle create user
-  async function handleSubmit(e) {
-    const [addUser] = useMutation(ADD_USER);
-
-    e.preventDefault();
-
-    if (isValid()) {
-      const mutationResponse = await addUser({
-        variables: signUpForm,
-      });
-      const token = mutationResponse.data.addUser.token;
-      Auth.login(token);
-      return;
-    }
-
-    alert("Something went wrong");
-  }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -108,10 +66,10 @@ export default function SignUp() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <AddIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" sx={{ mb: 4 }}>
           Sign Up
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
+        <form onSubmit={handleFormSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -121,8 +79,8 @@ export default function SignUp() {
                 label="First Name"
                 name="firstName"
                 autoComplete="given-name"
-                value={signUpForm.firstName}
-                onChange={handleOnChange}
+                value={formState.firstName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -133,8 +91,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
-                value={signUpForm.lastName}
-                onChange={handleOnChange}
+                value={formState.lastName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -146,24 +104,10 @@ export default function SignUp() {
                 name="email"
                 autoComplete="email"
                 type="email"
-                value={signUpForm.email}
-                onChange={handleOnChange}
+                value={formState.email}
+                onChange={handleChange}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="dob"
-                label="Date of Birth "
-                name="dob"
-                autoComplete="date-of-birth"
-                placeholder="DD/MM/YYYY"
-                inputProps={{ maxLength: 8 }}
-                value={signUpForm.dob}
-                onChange={handleOnChange}
-              />
-            </Grid> */}
             <Grid item xs={12} sm={6}>
               <PatternFormat
                 required
@@ -176,24 +120,10 @@ export default function SignUp() {
                 customInput={TextField}
                 type="tel"
                 format="##/##/####"
-                value={signUpForm.dob}
-                onChange={handleOnChange}
+                value={formState.dob}
+                onChange={handleChange}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="phoneNumber"
-                label="Phone Number"
-                name="phoneNumber"
-                autoComplete="phone-number"
-                type="tel"
-                inputProps={{ maxLength: 10 }}
-                value={signUpForm.phoneNumber}
-                onChange={handleOnChange}
-              />
-            </Grid> */}
             <Grid item xs={12} sm={6}>
               <PatternFormat
                 required
@@ -205,8 +135,8 @@ export default function SignUp() {
                 customInput={TextField}
                 type="tel"
                 format="#### ### ###"
-                value={signUpForm.phoneNumber}
-                onChange={handleOnChange}
+                value={formState.phoneNumber}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -218,8 +148,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                value={signUpForm.password}
-                onChange={handleOnChange}
+                onChange={handleChange}
               />
             </Grid>
           </Grid>
@@ -231,9 +160,11 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
-        </Box>
+        </form>
       </Box>
-      <Copyright sx={{ mt: 2 }} />
+      {/* <Copyright sx={{ mt: 2 }} /> */}
     </Container>
   );
 }
+
+export default Signup;

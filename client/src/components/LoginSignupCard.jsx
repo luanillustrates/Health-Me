@@ -8,8 +8,7 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 
 import LoginForm from "./LoginForm";
-// import SignupForm from "./SignupForm";
-import Test from "./TestForm";
+import SignupForm from "./SignupForm";
 
 export default function LoginSignupCard() {
   const [value, setValue] = React.useState(0);
@@ -20,8 +19,19 @@ export default function LoginSignupCard() {
 
   return (
     <Card>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange}>
+      <AppBar
+        position="static"
+        style={{
+          background: "transparent",
+          boxShadow: "none",
+        }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="fullWidth"
+          centered
+        >
           <Tab label="Login" />
           <Tab label="Signup" />
         </Tabs>
@@ -34,7 +44,7 @@ export default function LoginSignupCard() {
         </Box>
         <Box hidden={value !== 1}>
           <Typography component="div">
-            <Test />
+            <SignupForm />
           </Typography>
         </Box>
       </CardContent>
