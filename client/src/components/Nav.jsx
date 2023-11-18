@@ -1,5 +1,5 @@
 // import Auth from '../../utils/auth';
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import logo from "../assets/images/healthme_logo.png";
 
@@ -16,6 +16,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Link from "@mui/material/Link";
 
 const pages = ["Services", "Contact"];
 const settings = ["Profile", "Dashboard", "Logout"];
@@ -46,11 +47,17 @@ function ResponsiveAppBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <Link to="/home">
+          {/* LOGO */}
+          <Link
+            component={RouterLink}
+            href="#app-bar-with-responsive-menu"
+            to="/"
+          >
             <img src={logo} alt="" width="120em" />
-          </Link> */}
+          </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* may be redundant */}
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -85,25 +92,9 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Box sx={{ mr: 5 }}>
-            <Link
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <img src={logo} alt="" width="120em" />
-            </Link>
-          </Box>
+          </Box> */}
+
+          {/* Navbar Href */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -116,10 +107,16 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/* !loggedIn button */}
+          <Link component={RouterLink} to="/login">
+            <Button>Login</Button>
+          </Link>
+
+          {/* loggedIn button */}
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="" />
+                <Avatar alt="Avatar" src="" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -144,7 +141,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
