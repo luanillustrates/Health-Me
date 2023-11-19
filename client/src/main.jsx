@@ -9,6 +9,8 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Bookings from './pages/Bookings';
+import Summary from './pages/Summary';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: '/services',
         element: <Services />,
+      },
+      {
+        path: '/bookings',
+        element: <Bookings />,
+      },
+      {
+        path: '/summary',
+        element: <Summary />,
       },
     ],
   },
