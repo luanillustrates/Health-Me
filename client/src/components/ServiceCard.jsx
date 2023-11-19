@@ -27,7 +27,7 @@ export default function ServiceCard({ name, image, alt, description }) {
   );
 }
 
-ServiceCard.PropTypes = {
+ServiceCard.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
