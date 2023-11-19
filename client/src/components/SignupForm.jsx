@@ -3,13 +3,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { FormControl } from "@mui/material";
 
 import { PatternFormat } from "react-number-format";
 
@@ -17,7 +15,7 @@ import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-function Signup(props) {
+export default function Signup() {
   const [formState, setFormState] = React.useState({
     firstName: "",
     lastName: "",
@@ -162,9 +160,6 @@ function Signup(props) {
           </Button>
         </form>
       </Box>
-      {/* <Copyright sx={{ mt: 2 }} /> */}
     </Container>
   );
 }
-
-export default Signup;
