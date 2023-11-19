@@ -1,8 +1,4 @@
-// import Auth from '../../utils/auth';
 import { Link as RouterLink } from 'react-router-dom';
-
-import logo from '../assets/images/healthme_logo.png';
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,10 +14,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 
-const pages = ['Services', 'Contact'];
+import logo from '../assets/images/healthme_logo.png';
+
+import Services from '../pages/Services';
+import Contact from '../pages/Contact';
+
 const settings = ['Profile', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+function Nav2() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -47,12 +47,16 @@ function ResponsiveAppBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* LOGO */}
-          <Link component={RouterLink} href="/" to="/">
+          <Link
+            noWrap
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            component={RouterLink}
+            href="#app-bar-with-responsive-menu"
+            to="/"
+          >
             <img src={logo} alt="" width="120em" />
           </Link>
 
-          {/* may be redundant */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -60,7 +64,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="black"
             >
               <MenuIcon />
             </IconButton>
@@ -82,45 +86,44 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem>
+                <Link>
+                  <Services />
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
 
-          {/* Navbar Href */}
+          <Link
+            noWrap
+            component={RouterLink}
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+            }}
+            href="#app-bar-with-responsive-menu"
+            to="/"
+          >
+            <img src={logo} alt="" width="120em" />
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            <Link to="/services">Services</Link>
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ my: 2, color: 'grey', display: 'block' }}
               >
                 {page}
               </Button>
-            ))}
-            <Link
-              component={RouterLink}
-              href="#app-bar-with-responsive-menu"
-              to="/services"
-            >
-              <img src={logo} alt="" width="120em" />
-              SERVICES
-            </Link>
+            ))} */}
           </Box>
 
-          {/* !loggedIn button */}
-          <Link component={RouterLink} to="/login">
-            <Button>Login</Button>
-          </Link>
-
-          {/* loggedIn button */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Avatar" src="" />
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -151,4 +154,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Nav2;
