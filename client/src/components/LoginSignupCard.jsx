@@ -18,7 +18,15 @@ export default function LoginSignupCard() {
   };
 
   return (
-    <Card>
+    <Card
+      sx={{
+        p: 2,
+        margin: "auto",
+        mt: 8,
+        maxWidth: 500,
+        flexGrow: 1,
+      }}
+    >
       <AppBar
         position="static"
         style={{
