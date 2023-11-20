@@ -41,7 +41,6 @@ export const UPDATE_USER = gql`
     $firstName: String!
     $lastName: String!
     $email: String!
-    $password: String!
     $phoneNumber: String!
     $dob: String!
   ) {
@@ -49,7 +48,6 @@ export const UPDATE_USER = gql`
       firstName: $firstName
       lastName: $lastName
       email: $email
-      password: $password
       phoneNumber: $phoneNumber
       dob: $dob
     ) {

@@ -62,6 +62,7 @@ export default function Login() {
             id="email"
             label="Email Address"
             name="email"
+            type="email"
             autoComplete="email"
             autoFocus
             onChange={handleChange}
@@ -70,10 +71,10 @@ export default function Login() {
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
             id="password"
+            label="Password"
+            name="password"
+            type="password"
             autoComplete="current-password"
             onChange={handleChange}
           />
