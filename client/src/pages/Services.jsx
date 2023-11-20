@@ -78,17 +78,23 @@ const services = [
   },
 ];
 
+// unique id to each service
+
 export default function Services() {
   return (
     <Container
-      sx={{ width: 1, display: "flex", flexDirection: "column", mx: "auto" }}
+      sx={{
+        width: 1,
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <Typography variant="h1">Services</Typography>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
-        // justifyContent="center"
+        justifyContent="center"
       >
         {services.map((service) => {
           return (

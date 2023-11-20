@@ -12,7 +12,17 @@ import Typography from "@mui/material/Typography";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 
+import { useQuery } from "@apollo/client";
+import { QUERY_USER } from "../utils/queries";
+
 export default function Profile() {
+  const { loading, error, data } = useQuery(QUERY_USER);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const { user } = data;
+
   return (
     <Box
       sx={{
@@ -30,37 +40,45 @@ export default function Profile() {
           <TextField
             margin="normal"
             fullWidth
-            disabled
-            id="standard-disabled"
+            InputProps={{
+              readOnly: true,
+            }}
+            id="standard-read-only-input"
             label="Name"
-            defaultValue="value firstName && value lastName"
+            defaultValue={user.firstName + " " + user.lastName}
             variant="standard"
           />
           <TextField
             margin="normal"
             fullWidth
-            disabled
-            id="standard-disabled"
+            InputProps={{
+              readOnly: true,
+            }}
+            id="standard-read-only-input"
             label="Date of birth"
-            defaultValue="dob"
+            defaultValue={user.dob}
             variant="standard"
           />
           <TextField
             margin="normal"
             fullWidth
-            disabled
-            id="standard-disabled"
+            InputProps={{
+              readOnly: true,
+            }}
+            id="standard-read-only-input"
             label="Email"
-            defaultValue="email"
+            defaultValue={user.email}
             variant="standard"
           />
           <TextField
             margin="normal"
             fullWidth
-            disabled
-            id="standard-disabled"
+            InputProps={{
+              readOnly: true,
+            }}
+            id="standard-read-only-input"
             label="Phone Number"
-            defaultValue="phoneNumber"
+            defaultValue={user.phoneNumber}
             variant="standard"
           />
         </CardContent>
