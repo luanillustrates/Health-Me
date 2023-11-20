@@ -9,6 +9,7 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Account from './pages/Account';
 import Bookings from './pages/Bookings';
 import Summary from './pages/Summary';
 
@@ -27,12 +28,24 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: '/services',
+        element: <Services />,
+      },
+      {
         path: '/contact',
         element: <Contact />,
       },
       {
-        path: '/services',
-        element: <Services />,
+        path: '/account',
+        element: <Account />,
+      },
+      {
+        path: '/bookings',
+        element: <Bookings />,
+      },
+      {
+        path: '/summary',
+        element: <Summary />,
       },
       {
         path: '/bookings',
