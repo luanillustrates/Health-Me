@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -41,7 +41,7 @@ export default function NavBar() {
             onClick={handleMenuOpen}
             color="inherit"
           >
-            <AccountCircle />
+            <Avatar />
           </IconButton>
           <Menu
             id="menu-appbar"
