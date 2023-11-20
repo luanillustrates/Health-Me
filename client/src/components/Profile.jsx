@@ -11,17 +11,85 @@ import Typography from "@mui/material/Typography";
 
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
+import { PatternFormat } from "react-number-format";
 
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
+import { UPDATE_USER } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 export default function Profile() {
+  const [editMode, setEditMode] = React.useState(false);
+  const [editProfile, setEditProfile] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    dob: "",
+    phoneNumber: "",
+  });
+  const [updateUser] = useMutation(UPDATE_USER);
   const { loading, error, data } = useQuery(QUERY_USER);
 
+  // Handle loading state
   if (loading) return <p>Loading...</p>;
+
+  // Handle error state
   if (error) return <p>Error: {error.message}</p>;
 
+  // Check if data and user are defined
+  if (!data || !data.user) {
+    return <p>User data not available.</p>;
+  }
+
   const { user } = data;
+
+  const handleEdit = () => {
+    setEditProfile({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      dob: user.dob,
+      phoneNumber: user.phoneNumber,
+    });
+    setEditMode(true);
+
+    // Change readOnly to false for all TextField components
+    document.querySelectorAll(".editable-field").forEach((element) => {
+      element.readOnly = false;
+    });
+  };
+
+  const handleSaveUpdate = async (event) => {
+    try {
+      await updateUser({
+        variables: {
+          firstName: editProfile.firstName,
+          lastName: editProfile.lastName,
+          dob: editProfile.dob,
+          email: editProfile.email,
+          phoneNumber: editProfile.phoneNumber,
+        },
+      });
+      alert("Profile updated successfully");
+    } catch (err) {
+      console.error(err);
+    }
+    setEditMode(false);
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+  };
+
+  const handleUpdate = (event) => {
+    const { name, value } = event.target;
+    setEditProfile({
+      ...editProfile,
+      [name]: value,
+    });
+  };
+
+  // handle delete account
 
   return (
     <Box
@@ -40,64 +108,107 @@ export default function Profile() {
           <TextField
             margin="normal"
             fullWidth
+            className="editable-field"
             InputProps={{
-              readOnly: true,
+              readOnly: !editMode,
             }}
             id="standard-read-only-input"
-            label="Name"
-            defaultValue={user.firstName + " " + user.lastName}
+            label="First Name"
+            defaultValue={user.firstName}
             variant="standard"
+            onChange={handleUpdate}
           />
           <TextField
             margin="normal"
             fullWidth
+            className="editable-field"
             InputProps={{
-              readOnly: true,
+              readOnly: !editMode,
             }}
             id="standard-read-only-input"
-            label="Date of birth"
+            label="Last Name"
+            defaultValue={user.lastName}
+            variant="standard"
+            onChange={handleUpdate}
+          />
+          <PatternFormat
+            margin="normal"
+            fullWidth
+            className="editable-field"
+            InputProps={{
+              readOnly: !editMode,
+            }}
+            id="standard-read-only-input"
+            label="Date of Birth"
             defaultValue={user.dob}
             variant="standard"
+            customInput={TextField}
+            type="tel"
+            format="##/##/####"
+            onChange={handleUpdate}
           />
           <TextField
             margin="normal"
             fullWidth
+            className="editable-field"
             InputProps={{
-              readOnly: true,
+              readOnly: !editMode,
             }}
             id="standard-read-only-input"
             label="Email"
             defaultValue={user.email}
             variant="standard"
+            onChange={handleUpdate}
           />
-          <TextField
+          <PatternFormat
             margin="normal"
             fullWidth
+            className="editable-field"
             InputProps={{
-              readOnly: true,
+              readOnly: !editMode,
             }}
             id="standard-read-only-input"
             label="Phone Number"
             defaultValue={user.phoneNumber}
             variant="standard"
+            customInput={TextField}
+            type="tel"
+            format="#### ### ###"
+            onChange={handleUpdate}
           />
         </CardContent>
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button size="small" startIcon={<EditIcon />}>
-            Edit Profile
-          </Button>
-          <Button size="small" startIcon={<DeleteIcon />}>
-            Delete Account
-          </Button>
-        </CardActions>
-        {/* when editing, change to these buttons */}
-        <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button size="small" startIcon={<CheckIcon />}>
-            Save
-          </Button>
-          <Button size="small" startIcon={<ClearIcon />}>
-            Cancel
-          </Button>
+          {!editMode ? (
+            <>
+              <Button
+                size="small"
+                startIcon={<EditIcon />}
+                onClick={handleEdit}
+              >
+                Edit Profile
+              </Button>
+              <Button size="small" startIcon={<DeleteIcon />}>
+                Delete Account
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                size="small"
+                startIcon={<CheckIcon />}
+                onClick={handleSaveUpdate}
+              >
+                Save
+              </Button>
+              <Button
+                size="small"
+                startIcon={<ClearIcon />}
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </Button>
+            </>
+          )}
         </CardActions>
       </Card>
     </Box>
