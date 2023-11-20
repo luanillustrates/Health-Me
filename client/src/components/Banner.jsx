@@ -4,8 +4,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 import { Link as RouterLink } from "react-router-dom";
 import doctorBanner from "../assets/images/doctor-banner.jpg";
@@ -17,7 +17,12 @@ export default function MediaCard() {
         position="relative"
         component="img"
         src={doctorBanner}
-        sx={{ height: "80vh", objectFit: "cover", objectPosition: "0 5%" }}
+        sx={{
+          height: "80vh",
+          objectFit: "cover",
+          objectPosition: "0 5%",
+          opacity: "80%",
+        }}
       />
       <Box
         sx={{
@@ -25,9 +30,9 @@ export default function MediaCard() {
           top: "30%",
           textAlign: "center",
           width: "100vh",
-          color: "white",
+          color: "blue",
           padding: "10px",
-          textShadow: "5px 5px 50px grey",
+          // textShadow: "5px 5px 50px grey",
         }}
       >
         <Typography variant="h1">Health Me</Typography>
