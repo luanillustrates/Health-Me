@@ -25,6 +25,9 @@ export default function Appointment() {
 
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
+          <Typography variant="h4" component="div">
+            service name
+          </Typography>
           <Typography variant="h5" component="div">
             date booked
           </Typography>
@@ -33,20 +36,8 @@ export default function Appointment() {
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button size="small" startIcon={<EditIcon />}>
-            Edit
-          </Button>
           <Button size="small" startIcon={<DeleteIcon />}>
             Delete
-          </Button>
-        </CardActions>
-        {/* when editing, change to these buttons */}
-        <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button size="small" startIcon={<CheckIcon />}>
-            Save
-          </Button>
-          <Button size="small" startIcon={<ClearIcon />}>
-            Cancel
           </Button>
         </CardActions>
       </Card>
