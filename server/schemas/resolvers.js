@@ -57,6 +57,7 @@ const resolvers = {
 
       return { token, user };
     },
+
     addBooking: async (parent, { products }, context) => {
       if (context.user) {
         const booking = new Booking({ products });
@@ -70,6 +71,7 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -79,8 +81,8 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+
     updateBooking: async (parent, args, context) => {
-      // context user? Or context booking?
       if (context.user) {
         return await Booking.findByIdAndUpdate(context.user._id, args, {
           new: true,
@@ -89,6 +91,29 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+
+    removeUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndDelete(context.user._id, args);
+      }
+
+      throw AuthenticationError;
+    },
+
+    removeBooking: async (parent, { products }, context) => {
+      if (context.user) {
+        const booking = new Booking({ products });
+
+        await User.findByIdAndDelete(context.user._id, {
+          $pull: { bookings: booking },
+        });
+
+        return booking;
+      }
+
+      throw AuthenticationError;
+    },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
