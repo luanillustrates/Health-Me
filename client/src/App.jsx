@@ -7,7 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import { BookingContextProvider } from './BookingContext';
+import BookingContextProvider from './BookingContext';
 import Nav from './components/Nav';
 
 const httpLink = createHttpLink({
