@@ -1,4 +1,7 @@
+import React from 'react';
 import { PropTypes } from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom';
+
 import {
   Typography,
   Card,
@@ -21,8 +24,8 @@ export default function ServiceCard({ name, image, altText, description }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={''}>
-          Book Now
+        <Button size="small" onClick={''} component={RouterLink} to="/bookings">
+          Schedule an Appointment
         </Button>
       </CardActions>
     </Card>

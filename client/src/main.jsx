@@ -47,14 +47,6 @@ const router = createBrowserRouter([
         path: '/summary',
         element: <Summary />,
       },
-      {
-        path: '/bookings',
-        element: <Bookings />,
-      },
-      {
-        path: '/summary',
-        element: <Summary />,
-      },
     ],
   },
 ]);

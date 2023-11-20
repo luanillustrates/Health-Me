@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { DigitalClock } from '@mui/x-date-pickers/DigitalClock';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Grid } from '@mui/material';
-import { Button } from 'react-scroll';
+import { Grid, Button } from '@mui/material';
+import { useMutation } from '@apollo/client';
 
 const today = dayjs();
 const yesterday = dayjs().subtract(1, 'day');
 
 export default function BookingForm() {
+  // const { state, setState } = React.useState({
+  //   bookedDate: '',
+  //   bookedTime: '',
+  // });
+  // const [booking, { error }] = useMutation(ADD_BOOKING);
+
+  // const handleChange = (event) => {
+  //   const { date, value } = event.target;
+  //   setState({
+  //     ...state,
+  //     [date]: value,
+  //   });
+  // };
   return (
     <Grid container spacing={1}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -20,7 +34,7 @@ export default function BookingForm() {
             componentsProps={{ actionBar: { actions: [] } }}
             disablePast
             views={['year', 'month', 'day']}
-            onChange={''}
+            // onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
@@ -30,11 +44,13 @@ export default function BookingForm() {
             skipDisabled
             minTime={dayjs().set('hour', 9).startOf('hour')}
             maxTime={dayjs().set('hour', 16).startOf('hour')}
-            onChange={''}
+            // onChange={handleChange}
           />
         </Grid>
       </LocalizationProvider>
-      <Button>Book Appointment</Button>
+      <Button size="large" onClick={''} component={RouterLink} to="/summary">
+        Book Appointment
+      </Button>
     </Grid>
   );
 }
