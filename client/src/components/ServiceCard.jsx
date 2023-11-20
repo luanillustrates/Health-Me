@@ -1,4 +1,10 @@
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
+import { UPDATE_USER } from '../utils/mutations';
+import { useBookingContext } from '../BookingContext';
+
 import { PropTypes } from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -12,6 +18,17 @@ import {
 } from '@mui/material/';
 
 export default function ServiceCard({ name, image, altText, description }) {
+  const { data: selectedData } = useQuery(QUERY_USER);
+  const [updateSelectedData] = useMutation(UPDATE_USER);
+  const setSelectedData = useBookingContext();
+
+  const handleSelectionChange = (newData) => {
+    updateSelectedData({
+      variables: { newData },
+    });
+    setSelectedData(newData);
+  };
+
   return (
     <Card sx={{ maxWidth: 350 }}>
       <CardMedia component="img" alt={altText} height="250" src={image} />
@@ -24,7 +41,12 @@ export default function ServiceCard({ name, image, altText, description }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={''} component={RouterLink} to="/bookings">
+        <Button
+          size="small"
+          onClick={() => handleSelectionChange('newData')}
+          component={RouterLink}
+          to="/bookings"
+        >
           Schedule an Appointment
         </Button>
       </CardActions>
