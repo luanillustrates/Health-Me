@@ -39,6 +39,7 @@ export const QUERY_FIELDS = gql`
 export const QUERY_USER = gql`
   {
     user {
+      _id
       firstName
       lastName
       email

@@ -6,6 +6,7 @@ const resolvers = {
     fields: async () => {
       return await Field.find();
     },
+
     services: async (parent, { field, name }) => {
       const params = {};
 
@@ -21,21 +22,33 @@ const resolvers = {
 
       return await Service.find(params).populate("field");
     },
+
     service: async (parent, { _id }) => {
       return await Service.findById(_id).populate("field");
     },
+
+    // user: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findById(context.user._id).populate({
+    //       path: "bookings.services",
+    //       populate: "field",
+    //     });
+
+    //     return user;
+    //   }
+
+    //   throw AuthenticationError;
+    // },
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "bookings.services",
-          populate: "field",
-        });
-
+        const user = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
         return user;
       }
-
-      throw AuthenticationError;
+      throw new AuthenticationError();
     },
+
     booking: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
@@ -82,15 +95,15 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    updateBooking: async (parent, args, context) => {
-      if (context.user) {
-        return await Booking.findByIdAndUpdate(context.user._id, args, {
-          new: true,
-        });
-      }
+    // updateBooking: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return await Booking.findByIdAndUpdate(context.user._id, args, {
+    //       new: true,
+    //     });
+    //   }
 
-      throw AuthenticationError;
-    },
+    //   throw AuthenticationError;
+    // },
 
     removeUser: async (parent, args, context) => {
       if (context.user) {

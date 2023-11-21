@@ -51,10 +51,11 @@ export const UPDATE_USER = gql`
       phoneNumber: $phoneNumber
       dob: $dob
     ) {
-      token
-      user {
-        _id
-      }
+      firstName
+      lastName
+      email
+      phoneNumber
+      dob
     }
   }
 `;
