@@ -107,7 +107,7 @@ const resolvers = {
 
     removeUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndDelete(context.user._id, args);
+        return await User.findByIdAndRemove(context.user._id, args);
       }
 
       throw AuthenticationError;
