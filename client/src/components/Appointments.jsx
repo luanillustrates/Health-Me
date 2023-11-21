@@ -14,9 +14,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 export default function Appointment() {
   return (
     <Container
+      flex
       maxWidth={false}
       sx={{
-        minWidth: 900,
+        minWidth: 500,
         marginTop: 4,
         display: 'flex',
         flexDirection: 'column',

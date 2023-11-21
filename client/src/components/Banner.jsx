@@ -35,7 +35,7 @@ export default function MediaCard() {
           // textShadow: "5px 5px 50px grey",
         }}
       >
-        <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h1" sx={{ fontWeight: 'bold', fontSize: '5rem' }}>
           A one-stop shop to get your health needs met.
         </Typography>
 
@@ -45,6 +45,7 @@ export default function MediaCard() {
             variant="contained"
             component={RouterLink}
             to="/services"
+            sx={{ ml: 15 }}
           >
             Book an appointment
           </Button>
