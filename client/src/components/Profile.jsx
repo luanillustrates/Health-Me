@@ -16,6 +16,7 @@ import { PatternFormat } from "react-number-format";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { UPDATE_USER } from "../utils/mutations";
+import { REMOVE_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 export default function Profile() {
@@ -29,6 +30,7 @@ export default function Profile() {
   });
 
   const [updateUser] = useMutation(UPDATE_USER);
+  const [removeUser] = useMutation(REMOVE_USER);
   const { loading, error, data } = useQuery(QUERY_USER);
 
   // Handle loading state
@@ -96,7 +98,24 @@ export default function Profile() {
     });
   };
 
-  // handle delete account
+  const handleDeleteAccount = async () => {
+    try {
+      const { data } = await removeUser({
+        variables: { id: user._id },
+      });
+
+      if (data.removeUser) {
+        // User deleted successfully, you may want to redirect or perform other actions
+        alert("Account deleted successfully");
+      } else {
+        // Handle the case where the user wasn't deleted
+        alert("Failed to delete account");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   return (
     <Box
@@ -194,7 +213,11 @@ export default function Profile() {
               >
                 Edit Profile
               </Button>
-              <Button size="small" startIcon={<DeleteIcon />}>
+              <Button
+                size="small"
+                startIcon={<DeleteIcon />}
+                onClick={handleDeleteAccount}
+              >
                 Delete Account
               </Button>
             </>

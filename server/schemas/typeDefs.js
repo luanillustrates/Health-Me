@@ -53,7 +53,7 @@ const typeDefs = `#graphql
     addBooking(bookedDate: String!, bookedTime: String!, comment: String!, services: [ID]!): Booking
     updateUser(firstName: String!, lastName: String!, email: String!, phoneNumber: String!, dob: String!): User
     updateBooking(bookedDate: String!, bookedTime: String!, comment: String!, services: [ID]!): Booking
-    removeUser: User
+    removeUser(id: ID!): User
     removeBooking(bookingId: ID!): User
     login(email: String!, password: String!): Auth
   }

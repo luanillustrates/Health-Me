@@ -60,6 +60,12 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const REMOVE_USER = gql`
+  mutation removeUser($id: ID!) {
+    removeUser(id: $id)
+  }
+`;
+
 export const ADD_BOOKING = gql`
   mutation addBooking($services: [ID]!) {
     addBooking(services: $services) {
