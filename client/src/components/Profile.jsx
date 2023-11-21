@@ -61,15 +61,20 @@ export default function Profile() {
 
   const handleSaveUpdate = async (event) => {
     try {
+      const variablesToSend = {
+        id: user._id,
+        firstName: editProfile.firstName,
+        lastName: editProfile.lastName,
+        dob: editProfile.dob,
+        email: editProfile.email,
+        phoneNumber: editProfile.phoneNumber,
+      };
+      console.log("Variables being sent to server:", variablesToSend);
+
       await updateUser({
-        variables: {
-          firstName: editProfile.firstName,
-          lastName: editProfile.lastName,
-          dob: editProfile.dob,
-          email: editProfile.email,
-          phoneNumber: editProfile.phoneNumber,
-        },
+        variables: variablesToSend,
       });
+
       alert("Profile updated successfully");
     } catch (err) {
       console.error(err);
@@ -83,9 +88,10 @@ export default function Profile() {
 
   const handleUpdate = (event) => {
     const { name, value } = event.target;
-    setEditProfile({
-      ...editProfile,
-      [name]: value,
+    setEditProfile((prevEditProfile) => {
+      const updatedProfile = { ...prevEditProfile, [name]: value };
+      console.log("Updated Profile:", updatedProfile);
+      return updatedProfile;
     });
   };
 
