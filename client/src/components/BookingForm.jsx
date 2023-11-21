@@ -15,7 +15,13 @@ const yesterday = dayjs().subtract(1, 'day');
 
 export default function BookingForm() {
   return (
-    <Grid container spacing={1}>
+    <Grid
+      container
+      spacing={1}
+      direction="column"
+      alignItems="center"
+      justify="center"
+    >
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Grid item xs={6}>
           <StaticDatePicker
@@ -37,7 +43,14 @@ export default function BookingForm() {
           />
         </Grid>
       </LocalizationProvider>
-      <Button size="large" onClick={''} component={RouterLink} to="/summary">
+      <Button
+        variant="contained"
+        size="large"
+        sx={{ mt: 8 }}
+        onClick={''}
+        component={RouterLink}
+        to="/summary"
+      >
         Book Appointment
       </Button>
     </Grid>
