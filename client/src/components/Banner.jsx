@@ -18,32 +18,34 @@ export default function MediaCard() {
         component="img"
         src={doctorBanner}
         sx={{
-          height: '100vh',
+          height: '80vh',
           objectFit: 'cover',
           objectPosition: '0 5%',
-          opacity: '80%',
+          opacity: '90%',
         }}
       />
       <Box
         sx={{
           position: 'absolute',
-          objectFit: 'contain',
-          top: '30%',
+          top: '50%',
           textAlign: 'center',
           width: '100vh',
-          color: 'black',
+          color: 'teal',
           padding: '10px',
           // textShadow: "5px 5px 50px grey",
         }}
       >
         <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
-          Health Me
-        </Typography>
-        <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
           A one-stop shop to get your health needs met.
         </Typography>
+
         <CardActions>
-          <Button size="large" component={RouterLink} to="/services">
+          <Button
+            size="large"
+            variant="contained"
+            component={RouterLink}
+            to="/services"
+          >
             Book an appointment
           </Button>
         </CardActions>

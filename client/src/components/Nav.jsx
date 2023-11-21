@@ -1,21 +1,21 @@
-import Auth from "../utils/auth";
-import { Link as RouterLink } from "react-router-dom";
+import Auth from '../utils/auth';
+import { Link as RouterLink } from 'react-router-dom';
 
-import logo from "../assets/images/healthme_logo.png";
+import logo from '../assets/images/healthme_logo.png';
 
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import Link from "@mui/material/Link";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link';
 
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -46,13 +46,13 @@ export default function NavBar() {
           <Menu
             id="menu-appbar"
             anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: 'top',
+              horizontal: 'right',
             }}
             keepMounted
             transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: 'top',
+              horizontal: 'right',
             }}
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
@@ -78,13 +78,13 @@ export default function NavBar() {
   return (
     <AppBar
       position="static"
-      style={{ background: "transparent", boxShadow: "none" }}
+      style={{ background: 'transparent', boxShadow: 'none' }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link
             noWrap
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             component={RouterLink}
             href="#app-bar-with-responsive-menu"
             to="/"
@@ -92,7 +92,7 @@ export default function NavBar() {
             <img src={logo} alt="" width="120em" />
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -106,18 +106,18 @@ export default function NavBar() {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
+                  vertical: 'bottom',
+                  horizontal: 'left',
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
+                  vertical: 'top',
+                  horizontal: 'left',
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: 'block', md: 'none' },
                 }}
               >
                 <MenuItem component={RouterLink} to="/services">
@@ -135,7 +135,7 @@ export default function NavBar() {
             component={RouterLink}
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
             }}
             href="#app-bar-with-responsive-menu"
@@ -143,7 +143,7 @@ export default function NavBar() {
           >
             <img src={logo} alt="logo image" width="120em" />
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button component={RouterLink} to="/services">
               Services
             </Button>
@@ -157,17 +157,17 @@ export default function NavBar() {
               <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}></IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
