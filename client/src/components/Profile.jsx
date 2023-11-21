@@ -27,6 +27,7 @@ export default function Profile() {
     dob: "",
     phoneNumber: "",
   });
+
   const [updateUser] = useMutation(UPDATE_USER);
   const { loading, error, data } = useQuery(QUERY_USER);
 
@@ -61,15 +62,20 @@ export default function Profile() {
 
   const handleSaveUpdate = async (event) => {
     try {
+      const variablesToSend = {
+        id: user._id,
+        firstName: editProfile.firstName,
+        lastName: editProfile.lastName,
+        dob: editProfile.dob,
+        email: editProfile.email,
+        phoneNumber: editProfile.phoneNumber,
+      };
+      console.log("Variables being sent to server:", variablesToSend);
+
       await updateUser({
-        variables: {
-          firstName: editProfile.firstName,
-          lastName: editProfile.lastName,
-          dob: editProfile.dob,
-          email: editProfile.email,
-          phoneNumber: editProfile.phoneNumber,
-        },
+        variables: variablesToSend,
       });
+
       alert("Profile updated successfully");
     } catch (err) {
       console.error(err);
@@ -83,9 +89,10 @@ export default function Profile() {
 
   const handleUpdate = (event) => {
     const { name, value } = event.target;
-    setEditProfile({
-      ...editProfile,
-      [name]: value,
+    setEditProfile((prevEditProfile) => {
+      const updatedProfile = { ...prevEditProfile, [name]: value };
+      console.log("Updated Profile:", updatedProfile);
+      return updatedProfile;
     });
   };
 
@@ -112,7 +119,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="firstName"
             label="First Name"
             defaultValue={user.firstName}
             variant="standard"
@@ -125,7 +132,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="lastName"
             label="Last Name"
             defaultValue={user.lastName}
             variant="standard"
@@ -138,7 +145,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="dob"
             label="Date of Birth"
             defaultValue={user.dob}
             variant="standard"
@@ -154,7 +161,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="email"
             label="Email"
             defaultValue={user.email}
             variant="standard"
@@ -167,7 +174,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="phoneNumber"
             label="Phone Number"
             defaultValue={user.phoneNumber}
             variant="standard"
