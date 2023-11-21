@@ -27,6 +27,7 @@ export default function Profile() {
     dob: "",
     phoneNumber: "",
   });
+
   const [updateUser] = useMutation(UPDATE_USER);
   const { loading, error, data } = useQuery(QUERY_USER);
 
@@ -118,7 +119,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="firstName"
             label="First Name"
             defaultValue={user.firstName}
             variant="standard"
@@ -131,7 +132,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="lastName"
             label="Last Name"
             defaultValue={user.lastName}
             variant="standard"
@@ -144,7 +145,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="dob"
             label="Date of Birth"
             defaultValue={user.dob}
             variant="standard"
@@ -160,7 +161,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="email"
             label="Email"
             defaultValue={user.email}
             variant="standard"
@@ -173,7 +174,7 @@ export default function Profile() {
             InputProps={{
               readOnly: !editMode,
             }}
-            id="standard-read-only-input"
+            id="phoneNumber"
             label="Phone Number"
             defaultValue={user.phoneNumber}
             variant="standard"
