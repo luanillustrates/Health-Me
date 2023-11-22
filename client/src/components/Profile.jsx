@@ -90,9 +90,18 @@ export default function Profile() {
   };
 
   const handleUpdate = (event) => {
+    console.log("handleUpdate called with event:", event);
     const { name, value } = event.target;
     setEditProfile((prevEditProfile) => {
       const updatedProfile = { ...prevEditProfile, [name]: value };
+      console.log("Updated Profile:", updatedProfile);
+      return updatedProfile;
+    });
+  };
+
+  const handleUpdatePattern = (name, values) => {
+    setEditProfile((prevEditProfile) => {
+      const updatedProfile = { ...prevEditProfile, [name]: values.value };
       console.log("Updated Profile:", updatedProfile);
       return updatedProfile;
     });
@@ -115,7 +124,6 @@ export default function Profile() {
       console.error(error);
     }
   };
-  
 
   return (
     <Box
@@ -140,7 +148,7 @@ export default function Profile() {
             }}
             id="firstName"
             label="First Name"
-            defaultValue={user.firstName}
+            value={editProfile.firstName}
             variant="standard"
             onChange={handleUpdate}
           />
@@ -153,7 +161,7 @@ export default function Profile() {
             }}
             id="lastName"
             label="Last Name"
-            defaultValue={user.lastName}
+            value={editProfile.lastName}
             variant="standard"
             onChange={handleUpdate}
           />
@@ -166,12 +174,14 @@ export default function Profile() {
             }}
             id="dob"
             label="Date of Birth"
-            defaultValue={user.dob}
+            value={editProfile.dob}
             variant="standard"
             customInput={TextField}
             type="tel"
             format="##/##/####"
-            onChange={handleUpdate}
+            onValueChange={(values) => {
+              handleUpdatePattern("dob", values);
+            }}
           />
           <TextField
             margin="normal"
@@ -182,7 +192,7 @@ export default function Profile() {
             }}
             id="email"
             label="Email"
-            defaultValue={user.email}
+            value={editProfile.email}
             variant="standard"
             onChange={handleUpdate}
           />
@@ -195,12 +205,14 @@ export default function Profile() {
             }}
             id="phoneNumber"
             label="Phone Number"
-            defaultValue={user.phoneNumber}
+            value={editProfile.phoneNumber}
             variant="standard"
             customInput={TextField}
             type="tel"
             format="#### ### ###"
-            onChange={handleUpdate}
+            onValueChange={(values) => {
+              handleUpdatePattern("phoneNumber", values);
+            }}
           />
         </CardContent>
         <CardActions sx={{ justifyContent: "flex-end" }}>
