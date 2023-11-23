@@ -24,7 +24,7 @@ This application can be run through the browser using the provided link down bel
 
 ## Usage
 
-Acess the application using the following deployed [HERE]([#](https://healthme-c02ea348ef65.herokuapp.com/)).
+Acess the application using the following deployed [HERE](https://healthme-c02ea348ef65.herokuapp.com/).
 
 ## Screenshot
 
