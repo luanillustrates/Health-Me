@@ -33,6 +33,19 @@ export default function Profile() {
   const [removeUser] = useMutation(REMOVE_USER);
   const { loading, error, data } = useQuery(QUERY_USER);
 
+  React.useEffect(() => {
+    if (data && data.user) {
+      const { user } = data;
+      setEditProfile({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        dob: user.dob,
+        phoneNumber: user.phoneNumber,
+      });
+    }
+  }, [data]);
+
   // Handle loading state
   if (loading) return <p>Loading...</p>;
 
@@ -56,9 +69,9 @@ export default function Profile() {
     });
     setEditMode(true);
 
-    // Change readOnly to false for all TextField components
+    // Change disabled to false for all TextField components
     document.querySelectorAll(".editable-field").forEach((element) => {
-      element.readOnly = false;
+      element.disabled = false;
     });
   };
 
@@ -144,7 +157,7 @@ export default function Profile() {
             fullWidth
             className="editable-field"
             InputProps={{
-              readOnly: !editMode,
+              disabled: !editMode,
             }}
             id="firstName"
             label="First Name"
@@ -157,7 +170,7 @@ export default function Profile() {
             fullWidth
             className="editable-field"
             InputProps={{
-              readOnly: !editMode,
+              disabled: !editMode,
             }}
             id="lastName"
             label="Last Name"
@@ -170,7 +183,7 @@ export default function Profile() {
             fullWidth
             className="editable-field"
             InputProps={{
-              readOnly: !editMode,
+              disabled: !editMode,
             }}
             id="dob"
             label="Date of Birth"
@@ -188,7 +201,7 @@ export default function Profile() {
             fullWidth
             className="editable-field"
             InputProps={{
-              readOnly: !editMode,
+              disabled: !editMode,
             }}
             id="email"
             label="Email"
@@ -201,7 +214,7 @@ export default function Profile() {
             fullWidth
             className="editable-field"
             InputProps={{
-              readOnly: !editMode,
+              disabled: !editMode,
             }}
             id="phoneNumber"
             label="Phone Number"
